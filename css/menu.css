@@ -1,0 +1,36 @@
+
+/* ugly code to make first one selected */
+#m1 {
+    border: 1px solid red;
+}
+/* list of selectale items */
+ul {
+    border: 4px double slategray;
+    /* width: 90%; */
+    height: 40px;
+    display: block;
+    list-style-type: none;
+    position: absolute;
+    bottom: 0px;
+    background-color: wheat;
+    padding: 1px 10px;
+}
+/* each item */
+li {
+    height: 32px;
+    display: inline-block;
+    padding-top: 4px;
+    
+}
+/* so when highlighted doesn't change */
+img {
+    border: 1px solid wheat;
+}
+
+/* used when clicking on person */
+div {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: wheat;
+}
