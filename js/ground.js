@@ -139,7 +139,7 @@ Ground.prototype.getFenceBoxes = function(){
     checkFences(this,"SW",-1,1,1);
     checkFences(this,"NE",1,-1,1);
     checkFences(this,"NW",-1,-1,1);
-
+    console.log("only if all good");
 }
 
 function checkFences(og,str,xMod,yMod,d1) {
