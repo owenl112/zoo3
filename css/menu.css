@@ -4,7 +4,7 @@
     border: 1px solid red;
 }
 /* list of selectale items */
-ul {
+#mainMenu {
     border: 4px double slategray;
     /* width: 90%; */
     height: 40px;
@@ -14,7 +14,35 @@ ul {
     bottom: 0px;
     background-color: wheat;
     padding: 1px 10px;
+    margin-bottom: 10px;
 }
+/* list of buildings */
+#buildMenu {
+    visibility: hidden;
+    border: 4px double slategray;
+    border-bottom: none;
+    text-align: center;
+    background-color: wheat;
+    width: 40px;
+    display: block;
+    list-style-type: none;
+    position: absolute;
+    bottom: 40px;
+    padding: 1px 3px;
+    left: 168px;
+}
+/* amount of money */
+#leftMenu {
+    height: 50px;
+    background-color: wheat;
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    padding: 2px;
+    margin: 0px;
+    border: 4px double slategray;
+}
+
 /* each item */
 li {
     height: 32px;

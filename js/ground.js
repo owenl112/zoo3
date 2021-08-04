@@ -7,7 +7,7 @@ function Ground(x,y,rX,rY,builtOn){
     this.builtOn=builtOn;
     this.fence="";
 }
-// builtOn: 0=nothing  1=path  2=neon-selected  3=temp-path
+// builtOn: 0=nothing  1=path  2=neon-selected  3=temp-path  4=home    53=toilets
 
 // draws the ground (not sprite based)
 Ground.prototype.draw = function() {
@@ -98,6 +98,10 @@ Ground.prototype.drawPath = function(){
 	ctx.stroke();
 }
 
+Ground.prototype.drawHome = function(){
+    ctx.drawImage(homeImage,this.rX-25,this.rY-35);
+}
+
 // resets fences / paths and draws it green
 Ground.prototype.deleteTile = function(){
     this.builtOn=0;
@@ -110,7 +114,9 @@ const fenceR = new Image(25,30);
 fenceR.src="./images/fence1.png";
 const fenceL = new Image(25,30);
 fenceL.src="./images/fence2.png";
-
+// home image
+const homeImage = new Image(50,50);
+homeImage.src="./images/home.png";
 // idk LOL
 Ground.prototype.makeFence = function(q){
     this.fence += q;
@@ -132,14 +138,54 @@ Ground.prototype.drawFence = function(){
     });
 }
 
+let fenceChecked = true;
 
 Ground.prototype.getFenceBoxes = function(){
-    this.builtOn=2;
+    fenceChecked=true;
+    // this.builtOn=2;
     checkFences(this,"SE",1,1,1);
     checkFences(this,"SW",-1,1,1);
     checkFences(this,"NE",1,-1,1);
     checkFences(this,"NW",-1,-1,1);
-    console.log("only if all good");
+    this.builtOn ==4;
+    if(fenceChecked){
+        let div = document.createElement("div");
+        let p = document.createElement("p");
+        div.style.backgroundColor = "rgba(245,222,179,1)";
+        p.style.fontSize="120%";
+        div.style.position="absolute";
+        p.textContent=`Is this Correct?`;
+        div.style.border="2px solid black";
+        div.style.top=`40px`;
+        div.style.left=`40px`;
+        let btn = document.createElement("button");
+        btn.textContent="Yes";
+        let btn2 = document.createElement("button");
+        btn2.textContent="No";
+        div.appendChild(p)
+        div.appendChild(btn);
+        div.appendChild(btn2);
+        body.appendChild(div);
+        btn2.onclick = function(){
+            tiles.forEach(t=>{
+                if(t.builtOn==2){
+                    t.builtOn=0;
+                }
+            });
+            div.remove();
+        }
+        btn.onclick = function(){
+            let tempHomes=[];
+            tiles.forEach(t=>{
+                if(t.builtOn==2){
+                    tempHomes.push(t);
+                    t.builtOn=0;
+                }
+            });
+            homes.push(tempHomes);
+            div.remove();
+        }
+    }
 }
 
 function checkFences(og,str,xMod,yMod,d1) {
@@ -148,7 +194,6 @@ function checkFences(og,str,xMod,yMod,d1) {
     while(go==false){
         let t = getTile(og.rX+xMod*x,og.rY+yMod*y);
         if(t !=0){
-            console.log(t);
             if(t.fence!=""){
                 let op=t.fence.split(" ");
                 op.forEach(o=>{
@@ -156,7 +201,8 @@ function checkFences(og,str,xMod,yMod,d1) {
                         go=true;
                 });
             }
-            t.builtOn=2;
+            if(t.builtOn==0)
+                t.builtOn=2;
             if( d1 == 1){
                 if(xMod==yMod){
                     checkFences(t,"NE",1,-1,0);
@@ -188,9 +234,11 @@ function complainFences(){
     body.appendChild(p);
     setTimeout(function(){p.remove();},2000);
     tiles.forEach(t=>{
-        if(t.builtOn==2)
+        if(t.builtOn==2){
             t.builtOn=0;
+        }
     });
+    fenceChecked=false;
 }
 
 Ground.prototype.displayTempPath = function() {
@@ -215,24 +263,33 @@ Ground.prototype.displayTempPath = function() {
     }
 }
 
-Ground.prototype.displayTempFence = function(x,y) {
-    tiles.forEach(t=>{
-        if(t.builtOn==4 ){
-            t.draw();
-            t.builtOn=0;
-        }
-    })
-    if(this.builtOn==0){
-        this.builtOn=4;
-        let f = getQuart(this,x,y);
-        console.log(f);
-        if(f == "SE ")
-            ctx.drawImage(fenceL,this.rX,this.rY-15);
-        else if(f=="NE ")
-            ctx.drawImage(fenceR,this.rX,this.rY-30);
-        if(f == "NW ")
-            ctx.drawImage(fenceL,this.rX-25,this.rY-30);
-        else if(f=="SW ")
-            ctx.drawImage(fenceR,this.rX-25,this.rY-15);
+Ground.prototype.displayTempFence = function(quart) {
+    this.draw("lime");
+}
+Ground.prototype.drawBuildings = function(){
+    if(this.builtOn==51)
+        ctx.drawImage(toiletPng,this.rX-25,this.rY-40);
+    if(this.builtOn==52)
+        ctx.drawImage(foodPng,this.rX-25,this.rY-40);
+    if(this.builtOn==53)
+        ctx.drawImage(drinkPng,this.rX-25,this.rY-40);
+}
+
+Ground.prototype.buildBuilding = function(){
+    switch(selected.charAt(1)){
+        case '1':
+            ctx.drawImage(toiletPng,this.rX-25,this.rY-40);
+            this.builtOn=51;
+            break;
+        case '2':
+            ctx.drawImage(foodPng,this.rX-25,this.rY-40);
+            this.builtOn=52;
+            break;
+        case '3':
+            ctx.drawImage(drinkPng,this.rX-25,this.rY-40);
+            this.builtOn=53;
+            break;
+        default:
+            break;
     }
 }

@@ -1,5 +1,6 @@
 // grab the ul and img's 
-const fullMenu = document.querySelector("ul");
+const fullMenu = document.querySelector("#mainMenu");
+const subMenu = document.getElementById("buildMenu");
 const allBtns = document.querySelectorAll("img");
 const fenceImg = document.getElementById("m3");
 let btnS;
@@ -12,14 +13,39 @@ fullMenu.onclick = function(event){
 		updateMenu(btnS);
 	}
 }
+subMenu.onclick = function(e){
+	let btn = e.target;
+	if(btn.src!=null)
+		updateSubMenu(btn);
+}
+function updateSubMenu(button){
+	allBtns.forEach(b=> {
+		b.style.border="1px solid wheat"
+	});
+	button.style.border="1px solid red";
+	selected=`B${button.id.charAt(2)}`;
+}
 
 // if when a key is pressed, go check what menu item that is
 document.addEventListener('keydown', logKey);
 let keys = ['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0'];
+let buildMenuRotateNum=1;
 function logKey(e) {
     keys.forEach(key => {
         if(e.code == key){
-            updateSelected(keys.indexOf(key)+1);
+			if(e.code == 'Digit5' && selected.charAt(0)=="B"){
+				console.log("ok");
+				if(buildMenuRotateNum==4)
+					buildMenuRotateNum=1;
+				allBtns.forEach(b=>{
+					if(b.id==`bm${buildMenuRotateNum}`){
+						updateSubMenu(b)
+					}
+				});
+				buildMenuRotateNum++;
+			}
+			else
+            	updateSelected(keys.indexOf(key)+1);
         }
     });
 }
@@ -54,10 +80,24 @@ function updateMenu(button) {
 		case 'Cursor':
 			selected="C";
 			break;
-		case 'WayP':
-			selected="W";
+		case 'Home':
+			selected="H";
+			break;
+		case 'Build':
+			selected="B";
+			buildMenu();
 			break;
 		default:
 			selected="C";
 	}
+	if(selected!="B")
+		hideBuildMenu();
+}
+
+const buildingMenu = document.getElementById("buildMenu");
+function buildMenu() {
+	buildingMenu.style.visibility = "visible";
+}
+function hideBuildMenu() {
+	buildingMenu.style.visibility = "hidden";
 }

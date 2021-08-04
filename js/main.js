@@ -7,7 +7,7 @@ let height = canvas.height = window.innerHeight; // sets height
 let tiles=[];
 let peeps=[];
 let drags=[];
-
+let homes=[];
 // draws background
 ctx.fill();
 ctx.fillStyle = "rgba(0, 0, 0, 0.5)"
@@ -46,11 +46,18 @@ canvas.onmousedown = function(e){
 				peeps.forEach(p=>{ p.clicked(e.clientX-10,e.clientY-10)});
 				drags.forEach(d=>{ d.clicked(e.clientX-10,e.clientY-10)});
 			}
-			if(selected=="F"){ // if fences, build fence
+			else if(selected=="F"){ // if fences, build fence
 				let quart= getQuart(tile,e.clientX-10,e.clientY-10);
 				tile.makeFence(quart);
 			}
-			if(selected=="P") // if path, build path
+			else if(selected=="H"){
+				tile.getFenceBoxes();
+				tile.builtOn=4;
+			}
+			else if(selected.charAt(0)=="B"){
+				tile.buildBuilding();
+			}
+			else if(selected=="P") // if path, build path
 				tile.drawPath();
 			else if(selected=="T") // if bulldoze (Trash) delete tile
 				tile.deleteTile();
@@ -73,10 +80,12 @@ canvas.onmousedown = function(e){
 
 canvas.onmousemove = function(e) {
 	let tile = getTile(e.clientX-10,e.clientY-10); 
-	if(selected=="P")
+	if(selected=="P" && tile !=0)
 		 tile.displayTempPath();
-	else if(selected=="F")
-		tile.displayTempFence(e.clientX-10,e.clientY-10);
+	else if(selected=="F"){
+		let quart= getQuart(tile,e.clientX-10,e.clientY-10);
+		tile.displayTempFence( quart);
+	}
 }
 
 // gets a random number 
@@ -98,10 +107,12 @@ function updateScreen(){
 			t.draw("lime");
 		if(t.builtOn==1)
 			t.drawPath();
-
-			tiles[646].draw("blue");
 		if(t.fence!=0)
 			t.drawFence();
+		if(t.builtOn==4)
+			t.drawHome();
+		if(t.builtOn>=50)
+			t.drawBuildings();
 	});
 	// draw the peeps / dragons
 	peeps.forEach(p=> {p.draw();});

@@ -7,10 +7,14 @@ function Person(name,x,y){
     this.wander=true; // if they are just walking
     this.object=0; // what objective they have
     this.nxt=0; // where to walk next
+    this.hunger=random(50,100); // hunger
+    this.thirst=random(50,100); // thirst
+    this.energy=random(75,100); // energy
+    this.bathroom=random(25,100); // bathroom 
     this.id="Person";
 }
 
-// makes person sprite
+// makes person image
 let personPicture = new Image();
 personPicture.src = "./images/peep2.png";
 
@@ -35,15 +39,16 @@ Person.prototype.clicked = function(x,y){
     if(this.x+8 >= x && x >= this.x-8){
         if(this.y >= y && y >= this.y-32){
             let p = document.createElement("p");
-            p.style.backgroundColor = "rgba(245,222,179,.5)";
+            p.style.backgroundColor = "rgba(245,222,179,.8)";
             p.style.fontSize="70%";
+            p.style.whiteSpace = "pre-line";
             p.style.position="absolute";
-            p.textContent=`Hey I'm ${this.name}`;
+            p.textContent=`Hey I'm ${this.name} \n Energy: ${this.hunger}/100 \n Hunger: ${this.hunger}/100 \n Thirst: ${this.thirst}/100 \n Bathroom: ${this.bathroom}/100`;
             p.style.border="2px solid black";
-            p.style.top=`${this.y + 20}px`;
-            p.style.left=`${this.x + 20}px`;
+            p.style.top=`${this.y + 10}px`;
+            p.style.left=`${this.x + 10}px`;
             body.appendChild(p);
-            setTimeout(function(){p.remove();},2000);
+            setTimeout(function(){p.remove();},4000);
         }
     }
 }

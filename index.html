@@ -5,6 +5,7 @@
         <title>Zoo Cubed</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="css/menu.css" rel="stylesheet">
+        <script src="js/buildings.js" defer></script>
         <script src="js/ground.js" defer></script>
         <script src="js/people.js" defer></script>
         <script src="js/dragon.js" defer></script>
@@ -13,13 +14,22 @@
     </head>
     <body>
         <canvas></canvas>
-        <ul>
-            <li><img src="images/cursor.png" alt="Cursor" id="m1" draggable="false"></li>
-            <li><img src="images/mPath.png" alt="Pathes" id="m2" draggable="false"></li>
-            <li><img src="images/mFence.png" alt="Fences" id="m3"  draggable="false"></li>
-            <li><img src="images/mWayPoint.png" alt="WayP" id="m4"  draggable="false"></li>
-            <li><img src="images/bulldozer.png" alt="Trash" id="m5" draggable="false"></li>
-            
+        <ul id="mainMenu">
+            <li><img src="images/cursor.png" alt="Cursor" id="m1" draggable="false" title="Cursor"></li>
+            <li><img src="images/mPath.png" alt="Pathes" id="m2" draggable="false" title="Pathes"></li>
+            <li><img src="images/mFence.png" alt="Fences" id="m3"  draggable="false" title="Fences"></li>
+            <li><img src="images/mHome.png" alt="Home" id="m4"  draggable="false" title="Animal Home"></li>
+            <li><img src="images/mBuilding.png" alt="Build" id=m5 draggable="false" title="Buildings"></li>
+            <li><img src="images/bulldozer.png" alt="Trash" id="m6" draggable="false" title="Remove"></li>            
         </ul>
+        <ul id="buildMenu">
+            <li><img src="images/mToilet.png" alt="Toilets" id="bm1" draggable="false" title="Toilets"></li>
+            <li><img src="images/mFood.png" alt="Food" id="bm2" draggable="false" title="Food"></li>
+            <li><img src="images/mDrink.png" alt="Drink" id="bm3" draggable="false" title="Drinks"></li> 
+        </ul>
+        
+        <div id="leftMenu">
+            <p id="bal">Balance: $1000</p>
+        </div>
     </body>
 </html>
