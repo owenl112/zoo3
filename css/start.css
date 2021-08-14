@@ -1,0 +1,35 @@
+body {
+    text-align: center;
+    display: block;
+    background-color: rgb(252, 230, 191);
+}
+h1 {
+    font-size: 350%;
+    color: black;
+    margin-bottom: 0px;
+}
+p {
+    margin-bottom: 60px;
+}
+div {
+    margin-bottom: 40px;
+    font-size: 110%;
+}
+label:hover {
+    background-color: rgb(242,220,181);
+}
+#money {
+    border: 1px solid slategrey;
+    border-radius: 5px;
+    font-size: 120%;
+    width: 140px;
+}
+.bad {
+    text-decoration: line-through;
+}
+#start {
+    background-color: lightblue;
+    border: none;
+    font-size: 3em;
+    border-radius: 15px;
+}

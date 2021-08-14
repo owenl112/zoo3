@@ -1,8 +1,8 @@
 const canvas = document.querySelector("canvas"); // get canvas
 const body = document.querySelector("body"); // get body
 let ctx = canvas.getContext('2d'); // idk used for drawing I think
-let width = canvas.width = window.innerWidth ; // sets width
-let height = canvas.height = window.innerHeight; // sets height
+let width = canvas.width = window.innerWidth -10; // sets width
+let height = canvas.height = window.innerHeight -10; // sets height
 // arrays for tiles, people and dragons 
 let tiles=[];
 let peeps=[];
@@ -30,7 +30,7 @@ while(yCords < Math.round(height / 15)*15){
 tiles.forEach(t=>{
     t.draw();
 })
-
+tiles[0].drawPath();
 // makes it so right click works 
 canvas.addEventListener('contextmenu', e => {
 	e.preventDefault();
@@ -80,8 +80,11 @@ canvas.onmousedown = function(e){
 
 canvas.onmousemove = function(e) {
 	let tile = getTile(e.clientX-10,e.clientY-10); 
-	if(selected=="P" && tile !=0)
-		 tile.displayTempPath();
+	if(selected=="P" && tile !=0){
+		tile.displayTempPath();
+		if(e.buttons==1)
+			tile.drawPath();
+	}
 	else if(selected=="F"){
 		let quart= getQuart(tile,e.clientX-10,e.clientY-10);
 		tile.displayTempFence( quart);
@@ -118,5 +121,6 @@ function updateScreen(){
 	peeps.forEach(p=> {p.draw();});
 	drags.forEach(d=> {d.move();});
 
-	
+	if(random(0,60)==4)
+		peepSpawn();
 }

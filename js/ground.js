@@ -264,7 +264,22 @@ Ground.prototype.displayTempPath = function() {
 }
 
 Ground.prototype.displayTempFence = function(quart) {
-    this.draw("lime");
+    // console.log(this);
+    // ctx.beginPath();
+    // ctx.moveTo(this.rX,this.rY);
+    // if(quart.charAt(0)=='N')
+    //     ctx.moveTo(this.rX,this.rY-15);
+    // else if(quart.charAt(0)=='S')
+    //     ctx.moveTo(this.rX,this.rY+15);
+    // if(quart.charAt(1)=='W')
+    //     ctx.moveTo(this.rX-25,this.rY);
+    // else if(quart.charAt(1)=='E')
+    //     ctx.moveTo(this.rX+25,this.rY);
+    // ctx.moveTo(this.rX,this.rY);
+    // ctx.fillStyle = 'rgb(50,50,50)';
+	// ctx.fill();
+	// ctx.fillStyle = 'rgb(205,100,5)';
+	// ctx.stroke();
 }
 Ground.prototype.drawBuildings = function(){
     if(this.builtOn==51)

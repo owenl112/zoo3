@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8"/>
-        <title>Zoo Cubed</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link href="css/menu.css" rel="stylesheet">
-        <script src="js/buildings.js" defer></script>
-        <script src="js/ground.js" defer></script>
-        <script src="js/people.js" defer></script>
-        <script src="js/dragon.js" defer></script>
-        <script src="js/main.js" defer></script>
-        <script src="js/menu.js" defer></script>
+        <meta charset="utf-8" />
+        <title>Zoo3</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="css/start.css" rel="stylesheet" />
     </head>
     <body>
-        <canvas></canvas>
-        <ul id="mainMenu">
-            <li><img src="images/cursor.png" alt="Cursor" id="m1" draggable="false" title="Cursor"></li>
-            <li><img src="images/mPath.png" alt="Pathes" id="m2" draggable="false" title="Pathes"></li>
-            <li><img src="images/mFence.png" alt="Fences" id="m3"  draggable="false" title="Fences"></li>
-            <li><img src="images/mHome.png" alt="Home" id="m4"  draggable="false" title="Animal Home"></li>
-            <li><img src="images/mBuilding.png" alt="Build" id=m5 draggable="false" title="Buildings"></li>
-            <li><img src="images/bulldozer.png" alt="Trash" id="m6" draggable="false" title="Remove"></li>            
-        </ul>
-        <ul id="buildMenu">
-            <li><img src="images/mToilet.png" alt="Toilets" id="bm1" draggable="false" title="Toilets"></li>
-            <li><img src="images/mFood.png" alt="Food" id="bm2" draggable="false" title="Food"></li>
-            <li><img src="images/mDrink.png" alt="Drink" id="bm3" draggable="false" title="Drinks"></li> 
-        </ul>
-        
-        <div id="leftMenu">
-            <p id="bal">Balance: $1000</p>
-        </div>
+        <h1>Welcome to the Zoo:)</h1>
+        <p>This is a small project to create a "Zoo Tycoon" style game using javascript</p>
+        <h3>NOTE: No settings work yet because I don't want to switch to php yet</h3>
+        <h2>just click start:)</h2>
+        <form method="POST" action="zoo.html"> 
+            <div class="bad">
+                <div>
+                    <label for="money">Starting Money:</label>
+                    <input name="money" id="money" type="number" value="1000" min="100" max="9999999999" step="100" />
+                </div>
+                <div>
+                    <label for="light">Light Mode:</label>
+                    <input name="mode" id="light" type="radio"  checked/>
+                </div>
+                <div >
+                    <label for="dark">Dark Mode:</label>
+                    <input name="mode" id="dark" type="radio" />
+                </div>
+            </div>
+            <button id="start">Start!</button>
+        </form>
     </body>
 </html>
